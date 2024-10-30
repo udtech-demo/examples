@@ -1,0 +1,192 @@
+{
+	"info": {
+		"_postman_id": "ed3ed3c6-1e84-4a2b-95b9-0c65eefff093",
+		"name": "API v1",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "11906386"
+	},
+	"item": [
+		{
+			"name": "sign-in",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"if (responseCode.code === 201) {",
+							"        var jsonData = pm.response.json();",
+							"        postman.setEnvironmentVariable(\"access_token\", jsonData.access_token);",
+							"        postman.setEnvironmentVariable(\"refresh_token\", jsonData.refresh_token);",
+							"    }"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"nikolenko.d@udtech.global\",\n    \"password\": \"1234DNW\"\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api-server}}/api/v1/sign-in",
+					"host": [
+						"{{api-server}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"sign-in"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "sign-up",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"if (responseCode.code === 201) {",
+							"        var jsonData = pm.response.json();",
+							"        postman.setEnvironmentVariable(\"access_token\", jsonData.access_token);",
+							"        postman.setEnvironmentVariable(\"refresh_token\", jsonData.refresh_token);",
+							"    }"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"nikolenko.d@udtech.global\",\n    \"password\": \"1234DNW\",\n    \"firstname\": \"Danil\",\n    \"lastname\": \"Danil\"\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{api-server}}/api/v1/sign-up",
+					"host": [
+						"{{api-server}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"sign-up"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "refresh",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"if (responseCode.code === 200) {",
+							"        var jsonData = pm.response.json();",
+							"        postman.setEnvironmentVariable(\"access_token\", jsonData.access_token);",
+							"        postman.setEnvironmentVariable(\"refresh_token\", jsonData.refresh_token);",
+							"    }"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{refresh_token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{api-server}}/api/v1/refresh",
+					"host": [
+						"{{api-server}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"refresh"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "my profile",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{access_token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{api-server}}/api/v1/users/me",
+					"host": [
+						"{{api-server}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"users",
+						"me"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "health-check",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{api-server}}/api/v1/health-check",
+					"host": [
+						"{{api-server}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"health-check"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
